@@ -48,8 +48,8 @@ export function Loading() {
 export function ErrorBox({ error, onRetry }) {
   const { t } = useLang();
   return (
-    <div className="my-6 rounded-lg border border-alarm/40 bg-alarm/10 p-4 text-sm">
-      <p>{t('load_error')} <span className="text-alarm">{error?.message || String(error)}</span></p>
+    <div className="my-6 rounded-lg border border-saul bg-panel p-4 text-sm">
+      <p>{t('load_error')} <span className="text-text">{error?.message || String(error)}</span></p>
       {onRetry && <button type="button" className="btn mt-3" onClick={() => onRetry()}>{t('retry')}</button>}
     </div>
   );
@@ -108,7 +108,7 @@ export function Toggle({ checked, onChange, label }) {
 
 export function Tag({ children, onRemove }) {
   return (
-    <span className="inline-flex items-center gap-1 rounded bg-saul/15 border border-saul/40 px-1.5 py-px text-xs text-text/85">
+    <span className="inline-flex items-center gap-1 rounded bg-raised border border-line px-1.5 py-px text-xs text-muted">
       {children}
       {onRemove && (
         <button type="button" onClick={onRemove} className="text-faint hover:text-alarm cursor-pointer" aria-label={`Remove ${children}`}>×</button>

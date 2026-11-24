@@ -13,14 +13,24 @@ export function RadarMark({ className = 'size-6' }) {
   );
 }
 
+// Logo lockup after "Better Call Saul": white word + bold yellow word on a compact crimson plaque
+export function Wordmark({ className = '', size = 'text-[17px]' }) {
+  return (
+    <span className={`items-center gap-1.5 font-extrabold italic tracking-tight leading-none ${size} ${className}`}>
+      <span className="text-text">ASO</span>
+      <span className="rounded-[3px] bg-saul px-1.5 py-1 text-signal">Radar</span>
+    </span>
+  );
+}
+
 export function LangSwitch() {
   const { lang, setLang } = useLang();
   return (
-    <div className="flex rounded-md border border-text/25 overflow-hidden text-xs" role="group" aria-label="Language">
+    <div className="flex rounded-md border border-line overflow-hidden text-xs" role="group" aria-label="Language">
       {['en', 'ru'].map((l) => (
         <button
           key={l} type="button" onClick={() => setLang(l)} aria-pressed={lang === l}
-          className={`px-2 py-1 uppercase cursor-pointer ${lang === l ? 'bg-signal text-ink font-semibold' : 'text-text/70 hover:text-text'}`}
+          className={`px-2 py-1 uppercase cursor-pointer ${lang === l ? 'bg-raised text-text font-semibold' : 'text-faint hover:text-text'}`}
         >{l}</button>
       ))}
     </div>
@@ -29,13 +39,13 @@ export function LangSwitch() {
 
 export default function Layout() {
   const { t } = useLang();
-  const link = ({ isActive }) => `px-2.5 py-1 rounded-md ${isActive ? 'bg-signal text-ink font-semibold' : 'text-text/80 hover:text-signal'}`;
+  const link = ({ isActive }) => `px-2.5 py-1 rounded-md ${isActive ? 'bg-signal text-ink font-semibold' : 'text-muted hover:text-text'}`;
   return (
     <div className="min-h-screen">
-      <header className="sticky top-0 z-20 bg-saul-deep border-b-2 border-signal">
+      <header className="sticky top-0 z-20 bg-ink border-b border-line">
         <div className="mx-auto max-w-[1400px] px-4 h-12 flex items-center gap-3 sm:gap-4">
           <NavLink to="/" className="flex items-center gap-2 font-semibold shrink-0">
-            <RadarMark /> <span className="hidden sm:inline font-extrabold italic tracking-tight text-signal text-[17px]">ASO Radar</span>
+            <RadarMark /> <Wordmark className="hidden sm:inline-flex" />
           </NavLink>
           <nav className="flex gap-1 text-sm">
             <NavLink to="/" end className={link}>{t('nav_competitors')}</NavLink>
@@ -44,7 +54,7 @@ export default function Layout() {
           <div className="ml-auto flex items-center gap-3">
             {DEMO && <span className="hidden sm:inline text-xs text-signal">{t('demo_badge')}</span>}
             <LangSwitch />
-            {!DEMO && <button type="button" className="text-xs text-text/80 hover:text-signal cursor-pointer" onClick={() => api.signOut()}>{t('sign_out')}</button>}
+            {!DEMO && <button type="button" className="text-xs text-muted hover:text-text cursor-pointer" onClick={() => api.signOut()}>{t('sign_out')}</button>}
           </div>
         </div>
       </header>

@@ -128,7 +128,7 @@ export default function Competitors() {
       ) : (
         <div className="overflow-x-auto thin-scroll rounded-lg border border-line bg-panel">
           <table className="w-full text-sm">
-            <thead className="text-xs text-muted border-b-2 border-saul">
+            <thead className="text-xs text-muted border-b border-line">
               <tr>
                 <Th {...th} k="name" className="min-w-72">{t('col_app')}</Th>
                 <Th {...th} k="geo">{t('col_geo')}</Th>
@@ -177,7 +177,8 @@ export default function Competitors() {
                     <td className="px-3 py-2 tabular-nums text-right text-muted">{tracked != null ? `${tracked} ${t('days_short')}` : '—'}</td>
                     <td className="px-3 py-2 whitespace-nowrap">
                       {r.last_change_at ? (
-                        <span className={recent ? 'text-signal font-medium' : 'text-muted'}>
+                        <span className={`inline-flex items-center gap-1.5 ${recent ? 'text-signal font-medium' : 'text-muted'}`}>
+                          {recent && <span className="size-1.5 rounded-full bg-saul shadow-[0_0_0_3px_rgb(200_16_46/0.25)]" aria-hidden />}
                           {fmtAgo(r.last_change_at, t)} <span className="text-faint">({r.changes_count})</span>
                         </span>
                       ) : <span className="text-faint">—</span>}
