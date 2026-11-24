@@ -1,0 +1,39 @@
+@import "@fontsource-variable/onest";
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Onest Variable", system-ui, sans-serif;
+
+  /* ASO Radar palette: navy instrument panel + one amber "signal" colour for detected changes */
+  --color-ink: #131c2e;      /* page */
+  --color-panel: #1a2439;    /* surfaces */
+  --color-raised: #212d47;   /* hover / inputs */
+  --color-line: #2a3653;     /* borders */
+  --color-text: #e4e8f1;
+  --color-muted: #8c97b0;
+  --color-faint: #5d6886;
+  --color-signal: #f5b544;   /* change detected */
+  --color-live: #52c79a;
+  --color-alarm: #ef6f6c;    /* removed / account change */
+}
+
+html { color-scheme: dark; }
+body {
+  @apply bg-ink text-text font-sans antialiased;
+  font-size: 14px;
+  line-height: 1.45;
+  font-feature-settings: "tnum" 1;
+}
+:focus-visible { outline: 2px solid var(--color-signal); outline-offset: 2px; border-radius: 4px; }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+
+.input {
+  @apply bg-raised border border-line rounded-md px-2.5 py-1.5 text-text placeholder:text-faint outline-none;
+}
+.input:focus { border-color: var(--color-muted); }
+.btn {
+  @apply inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 font-medium border border-line text-text hover:bg-raised disabled:opacity-50 cursor-pointer;
+}
+.btn-primary { @apply bg-signal text-ink border-signal hover:bg-signal/90; }
+.thin-scroll::-webkit-scrollbar { height: 8px; width: 8px; }
+.thin-scroll::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 4px; }
