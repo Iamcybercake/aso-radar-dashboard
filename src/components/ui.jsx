@@ -15,10 +15,12 @@ export function Geo({ cc }) {
 export function Status({ status }) {
   const { t } = useLang();
   const removed = status === 'removed';
+  if (removed) {
+    return <span className="inline-flex rounded bg-saul px-1.5 py-0.5 text-xs font-bold text-signal whitespace-nowrap">{t('status_removed')}</span>;
+  }
   return (
-    <span className={`inline-flex items-center gap-1.5 text-xs whitespace-nowrap ${removed ? 'text-alarm' : 'text-muted'}`}>
-      <span className={`size-1.5 rounded-full ${removed ? 'bg-alarm' : 'bg-muted'}`} />
-      {removed ? t('status_removed') : t('status_live')}
+    <span className="inline-flex items-center gap-1.5 text-xs whitespace-nowrap text-muted">
+      <span className="size-1.5 rounded-full bg-muted" />{t('status_live')}
     </span>
   );
 }
@@ -80,7 +82,7 @@ export function Modal({ open, onClose, title, children, width = 'max-w-lg' }) {
     >
       {open && (
         <div className="p-5">
-          <h2 className="text-base font-semibold mb-4">{title}</h2>
+          <h2 className="text-base font-semibold mb-4 h-bar">{title}</h2>
           {children}
         </div>
       )}
@@ -106,7 +108,7 @@ export function Toggle({ checked, onChange, label }) {
 
 export function Tag({ children, onRemove }) {
   return (
-    <span className="inline-flex items-center gap-1 rounded bg-raised border border-line px-1.5 py-px text-xs text-muted">
+    <span className="inline-flex items-center gap-1 rounded bg-saul/15 border border-saul/40 px-1.5 py-px text-xs text-text/85">
       {children}
       {onRemove && (
         <button type="button" onClick={onRemove} className="text-faint hover:text-alarm cursor-pointer" aria-label={`Remove ${children}`}>×</button>

@@ -19,12 +19,12 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen grid place-items-center px-4">
+    <div className="min-h-screen grid place-items-center px-4 bg-saul-deep">
       <div className="absolute top-4 right-4"><LangSwitch /></div>
-      <form onSubmit={submit} className="w-full max-w-xs space-y-4">
+      <form onSubmit={submit} className="w-full max-w-xs space-y-4 rounded-xl bg-ink p-6 border-t-4 border-signal">
         <div className="flex items-center gap-3 mb-6">
           <RadarMark className="size-10" />
-          <h1 className="text-lg font-semibold">{t('login_title')}</h1>
+          <h1 className="text-lg font-semibold"><span className="block text-2xl font-extrabold italic tracking-tight text-signal">ASO Radar</span>{t('login_title')}</h1>
         </div>
         <label className="block space-y-1">
           <span className="text-xs text-muted">{t('email')}</span>

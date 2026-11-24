@@ -6,8 +6,8 @@
   --font-sans: "Inter Variable", system-ui, sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 
-  /* "Better Call Saul" palette, 85% / 12% / 3% rule:
-     85% neutral charcoal surfaces, 12% Saul yellow for focus and primary actions, 3% red for alarms */
+  /* "Better Call Saul" palette: charcoal surfaces carrying a poster pair of Saul yellow on crimson.
+     Yellow = what's new / primary action; red = brand structure, "before" state and alarms. */
   --color-ink: #0e0f11;      /* page */
   --color-panel: #16181d;    /* cards */
   --color-raised: #1f2229;   /* hover / inputs */
@@ -17,7 +17,9 @@
   --color-faint: #6b7280;
   --color-signal: #f5c518;   /* Saul yellow: active tabs, primary buttons, detected changes */
   --color-amber: #d97706;    /* secondary accent: manual marks */
-  --color-alarm: #dc2626;    /* removed apps, account changes */
+  --color-saul: #c8102e;     /* poster crimson: header, rails, section bars, secondary buttons */
+  --color-saul-deep: #8e0c1f;/* header band */
+  --color-alarm: #ef3b3b;    /* removed apps, account changes */
 }
 
 html { color-scheme: dark; }
@@ -34,8 +36,9 @@ body {
 }
 .input:focus { border-color: var(--color-muted); }
 .btn {
-  @apply inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 font-medium border border-line text-text hover:bg-raised disabled:opacity-50 cursor-pointer;
+  @apply inline-flex items-center gap-1.5 rounded-md px-3 py-1.5 font-medium border border-saul/70 text-text hover:bg-saul/20 disabled:opacity-50 cursor-pointer;
 }
 .btn-primary { @apply bg-signal text-ink border-signal hover:bg-signal/90; }
+.h-bar { @apply border-l-4 border-saul pl-2.5 leading-tight; }
 .thin-scroll::-webkit-scrollbar { height: 8px; width: 8px; }
 .thin-scroll::-webkit-scrollbar-thumb { background: var(--color-line); border-radius: 4px; }

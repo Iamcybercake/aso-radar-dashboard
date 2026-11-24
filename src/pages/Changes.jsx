@@ -48,7 +48,7 @@ export default function Changes() {
   return (
     <>
       <div className="flex flex-wrap items-center gap-2 mb-4">
-        <h1 className="text-base font-semibold mr-3">{t('feed_title')}</h1>
+        <h1 className="text-base font-semibold mr-3 h-bar">{t('feed_title')}</h1>
         <select className="input" value={kind} onChange={(e) => setKind(e.target.value)} aria-label={t('all_kinds')}>
           <option value="">{t('all_kinds')}</option>
           {KINDS.map((k) => <option key={k} value={k}>{t(`kind_${k}`)}</option>)}

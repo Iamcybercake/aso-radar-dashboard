@@ -4,7 +4,7 @@ import { createContext, useContext, useState } from 'react';
 const DICT = {
   en: {
     nav_competitors: 'Competitors', nav_changes: 'Changes', sign_out: 'Sign out', demo_badge: 'Demo data',
-    login_title: 'Sign in to ASO Radar', email: 'Email', password: 'Password', sign_in: 'Sign in',
+    login_title: 'Sign in to your radar', email: 'Email', password: 'Password', sign_in: 'Sign in',
     login_failed: 'Wrong email or password.',
     search: 'Search by name, developer or ID', all_geos: 'All geos', all_statuses: 'All statuses', all_tags: 'All tags',
     status_live: 'Live', status_removed: 'Removed', hide_paused: 'Hide paused',
@@ -49,7 +49,7 @@ const DICT = {
   },
   ru: {
     nav_competitors: 'Конкуренты', nav_changes: 'Изменения', sign_out: 'Выйти', demo_badge: 'Демо-данные',
-    login_title: 'Вход в ASO Radar', email: 'Email', password: 'Пароль', sign_in: 'Войти',
+    login_title: 'Вход в радар', email: 'Email', password: 'Пароль', sign_in: 'Войти',
     login_failed: 'Неверный email или пароль.',
     search: 'Поиск по названию, разработчику или ID', all_geos: 'Все гео', all_statuses: 'Все статусы', all_tags: 'Все теги',
     status_live: 'В сторе', status_removed: 'Снято', hide_paused: 'Скрыть на паузе',

@@ -17,7 +17,7 @@ function Strip({ label, urls, compare, shape, img, dim }) {
   const { t } = useLang();
   return (
     <div className="flex gap-3 items-start">
-      <span className={`w-12 shrink-0 pt-1 text-xs ${dim ? 'text-faint' : 'text-signal'}`}>{label}</span>
+      <span className={`w-12 shrink-0 pt-1 text-xs ${dim ? 'text-saul font-semibold' : 'text-signal font-semibold'}`}>{label}</span>
       {urls.length === 0 ? (
         <span className="text-xs text-faint pt-1">{t('no_items')}</span>
       ) : (
@@ -28,9 +28,9 @@ function Strip({ label, urls, compare, shape, img, dim }) {
               <div key={`${u}-${i}`} className="relative shrink-0">
                 <img
                   src={img(u)} alt="" loading="lazy"
-                  className={`${SHAPE[shape]} object-cover bg-raised ${dim ? 'opacity-55 saturate-50' : ''} ${isNew ? 'ring-2 ring-signal ring-offset-2 ring-offset-panel' : 'border border-line/60'}`}
+                  className={`${SHAPE[shape]} object-cover bg-raised ${dim ? 'opacity-60 saturate-50 border border-saul/50' : ''} ${isNew ? 'ring-2 ring-signal ring-offset-2 ring-offset-panel' : dim ? '' : 'border border-line/60'}`}
                 />
-                {shape !== 'icon' && <span className={`absolute left-1 top-1 rounded px-1 text-[10px] font-semibold ${isNew ? 'bg-signal text-ink' : 'bg-ink/70 text-muted'}`}>{i + 1}</span>}
+                {shape !== 'icon' && <span className={`absolute left-1 top-1 rounded px-1 text-[10px] font-semibold ${isNew ? 'bg-signal text-ink' : dim ? 'bg-saul text-text' : 'bg-ink/70 text-muted'}`}>{i + 1}</span>}
               </div>
             );
           })}
@@ -50,8 +50,8 @@ function TextDiff({ before, after }) {
       </button>
       {open && (
         <div className="mt-2 grid gap-3 md:grid-cols-2 text-xs">
-          <div><div className="text-faint mb-1">{t('before')}</div><p className="whitespace-pre-line text-muted max-h-56 overflow-auto thin-scroll">{before || '—'}</p></div>
-          <div><div className="text-signal mb-1">{t('after')}</div><p className="whitespace-pre-line max-h-56 overflow-auto thin-scroll">{after || '—'}</p></div>
+          <div><div className="text-saul font-semibold mb-1">{t('before')}</div><p className="whitespace-pre-line text-muted max-h-56 overflow-auto thin-scroll">{before || '—'}</p></div>
+          <div><div className="text-signal font-semibold mb-1">{t('after')}</div><p className="whitespace-pre-line max-h-56 overflow-auto thin-scroll">{after || '—'}</p></div>
         </div>
       )}
     </div>
@@ -68,7 +68,7 @@ export default function ChangeCard({ change, img, showApp = false, appIcon }) {
   const texts = fields.filter((f) => TEXT_DIFF_FIELDS.includes(f));
 
   return (
-    <article className={`rounded-lg border bg-panel p-4 ${isAccount ? 'border-alarm/50' : 'border-line'}`}>
+    <article className={`rounded-lg border bg-panel p-4 ${isAccount ? 'border-alarm bg-saul/10' : 'border-line'}`}>
       <header className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-2">
         {showApp && change.app && (
           <Link to={`/app/${change.app.id}`} className="flex items-center gap-2 font-semibold hover:text-signal">
@@ -79,14 +79,14 @@ export default function ChangeCard({ change, img, showApp = false, appIcon }) {
         )}
         <time className="text-xs text-muted" dateTime={change.detected_at}>{fmtDateTime(change.detected_at, lang)}</time>
         {change.kind !== 'update' && (
-          <span className={`text-xs font-semibold ${isAccount ? 'text-alarm' : 'text-signal'}`}>{t(`kind_${change.kind}`)}</span>
+          <span className={`text-xs font-bold rounded px-1.5 py-0.5 ${isAccount ? 'bg-saul text-signal' : 'bg-signal text-ink'}`}>{t(`kind_${change.kind}`)}</span>
         )}
       </header>
 
       <ul className="space-y-0.5">
         {fields.length
           ? fields.map((f) => (
-            <li key={f} className={f === 'developer_name' ? 'text-alarm font-semibold' : ''}>{changeLine(f, prev[f], s[f], lang)}</li>
+            <li key={f} className={f === 'developer_name' ? 'text-signal font-bold' : ''}>{changeLine(f, prev[f], s[f], lang)}</li>
           ))
           : <li className="whitespace-pre-line text-muted">{change.summary}</li>}
       </ul>

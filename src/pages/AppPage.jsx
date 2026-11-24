@@ -30,7 +30,7 @@ function Histogram({ h }) {
 function Life({ label, days, sub }) {
   const { t } = useLang();
   return (
-    <div className="rounded-lg border border-line bg-panel px-4 py-3">
+    <div className="rounded-lg border border-line border-t-2 border-t-saul bg-panel px-4 py-3">
       <div className="text-xs text-muted">{label}</div>
       <div className="text-2xl font-semibold mt-0.5 tabular-nums">
         {days != null ? <>{days}<span className="text-sm text-muted font-normal ml-1">{t('days_short')}</span></> : <span className="text-base text-faint font-normal">{t('life_unknown')}</span>}
@@ -287,14 +287,14 @@ export default function AppPage() {
       <div className="grid gap-6 lg:grid-cols-[minmax(0,1fr)_400px] items-start">
         <section>
           <div className="flex items-center mb-3">
-            <h2 className="text-base font-semibold">{t('timeline')}</h2>
+            <h2 className="text-base font-semibold h-bar">{t('timeline')}</h2>
             <button type="button" className="btn ml-auto" onClick={() => setMarking(true)}>+ {t('add_mark')}</button>
           </div>
           {timeline.length === 0 ? <Empty>{t('timeline_empty')}</Empty> : (
-            <ol className="relative space-y-3 border-l border-line pl-5 ml-1.5">
+            <ol className="relative space-y-3 border-l-2 border-saul/70 pl-5 ml-1.5">
               {timeline.map((it) => (
                 <li key={`${it.kind}-${it.c?.id ?? it.m.id}`} className="relative">
-                  <span className={`absolute -left-[26px] top-5 size-2.5 rounded-full ring-4 ring-ink ${it.kind === 'mark' ? 'bg-amber' : it.c.kind === 'account_change' ? 'bg-alarm' : 'bg-signal'}`} />
+                  <span className={`absolute -left-[27px] top-5 size-3 rounded-full ring-4 ring-ink ${it.kind === 'mark' ? 'bg-amber' : it.c.kind === 'account_change' ? 'bg-saul ring-alarm/40' : 'bg-signal'}`} />
                   {it.kind === 'change'
                     ? <ChangeCard change={it.c} img={img} />
                     : <MarkItem m={it.m} endAt={app.removed_at} onDelete={async () => { await api.deleteMark(it.m.id); reload({ quiet: true }); }} />}
@@ -304,7 +304,7 @@ export default function AppPage() {
           )}
         </section>
         <aside>
-          <h2 className="text-base font-semibold mb-3">{t('store_preview')}</h2>
+          <h2 className="text-base font-semibold mb-3 h-bar">{t('store_preview')}</h2>
           {s ? <StorePreview s={s} img={img} /> : <Empty>{t('no_data_yet')}</Empty>}
         </aside>
       </div>

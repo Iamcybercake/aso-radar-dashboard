@@ -128,7 +128,7 @@ export default function Competitors() {
       ) : (
         <div className="overflow-x-auto thin-scroll rounded-lg border border-line bg-panel">
           <table className="w-full text-sm">
-            <thead className="text-xs text-muted border-b border-line">
+            <thead className="text-xs text-muted border-b-2 border-saul">
               <tr>
                 <Th {...th} k="name" className="min-w-72">{t('col_app')}</Th>
                 <Th {...th} k="geo">{t('col_geo')}</Th>
