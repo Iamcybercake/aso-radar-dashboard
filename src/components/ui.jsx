@@ -99,9 +99,9 @@ export function Toggle({ checked, onChange, label }) {
       aria-label={label}
       title={label}
       onClick={(e) => { e.stopPropagation(); onChange(!checked); }}
-      className={`relative h-5 w-9 rounded-full transition-colors cursor-pointer ${checked ? 'bg-signal/25' : 'bg-line'}`}
+      className={`relative h-5 w-9 rounded-full transition-colors cursor-pointer ${checked ? 'bg-signal/12' : 'bg-line'}`}
     >
-      <span className={`absolute top-0.5 size-4 rounded-full transition-all ${checked ? 'bg-signal' : 'bg-faint'} ${checked ? 'left-[18px]' : 'left-0.5'}`} />
+      <span className={`absolute top-0.5 size-4 rounded-full transition-all ${checked ? 'bg-signal/60' : 'bg-faint'} ${checked ? 'left-[18px]' : 'left-0.5'}`} />
     </button>
   );
 }
