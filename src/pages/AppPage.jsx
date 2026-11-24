@@ -32,7 +32,7 @@ function Life({ label, days, sub }) {
   return (
     <div className="rounded-lg border border-line bg-panel px-4 py-3">
       <div className="text-xs text-muted">{label}</div>
-      <div className="text-2xl font-semibold mt-0.5">
+      <div className="text-2xl font-semibold mt-0.5 tabular-nums">
         {days != null ? <>{days}<span className="text-sm text-muted font-normal ml-1">{t('days_short')}</span></> : <span className="text-base text-faint font-normal">{t('life_unknown')}</span>}
       </div>
       {sub && <div className="text-xs text-faint mt-0.5">{sub}</div>}
@@ -124,10 +124,10 @@ function MarkItem({ m, endAt, onDelete }) {
   const { t, lang, dict } = useLang();
   const after = daysBetween(m.marked_at, endAt || undefined);
   return (
-    <article className="rounded-lg border border-live/40 bg-live/5 p-4">
+    <article className="rounded-lg border border-amber/40 bg-amber/5 p-4">
       <header className="flex flex-wrap items-center gap-x-3 gap-y-1">
-        <span className="font-semibold text-live">{dict.marks[m.type] || m.type}</span>
-        {m.keyword && <span className="rounded bg-raised px-1.5 text-sm">{m.keyword}</span>}
+        <span className="font-semibold text-amber">{dict.marks[m.type] || m.type}</span>
+        {m.keyword && <span className="rounded bg-raised px-1.5 text-xs font-mono">{m.keyword}</span>}
         <time className="text-xs text-muted">{fmtDate(m.marked_at, lang)}</time>
         <span className="text-sm">
           {t('days_after_mark', after ?? 0)}{endAt && <span className="text-faint"> ({t('until_removed')})</span>}
@@ -258,7 +258,7 @@ export default function AppPage() {
         <div className="flex items-center gap-4">
           {s?.rating != null && (
             <div className="text-right">
-              <div className="text-2xl font-semibold">{Number(s.rating).toFixed(1)}</div>
+              <div className="text-2xl font-semibold tabular-nums">{Number(s.rating).toFixed(1)}</div>
               <div className="text-xs text-muted">{fmtCount(s.rating_count)} {t('ratings')}</div>
             </div>
           )}
@@ -268,7 +268,7 @@ export default function AppPage() {
 
       <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-muted">
         <a className="underline underline-offset-2 hover:text-text" href={storeUrl(app.country, app.app_store_id)} target="_blank" rel="noreferrer">{t('open_store')}</a>
-        <span>id{app.app_store_id}</span>
+        <span className="font-mono">id{app.app_store_id}</span>
         <span>{t('checked')}: {fmtDateTime(app.last_checked_at, lang)}</span>
         <span>{t('snapshots_count', data.checks ?? 0)}</span>
       </div>
@@ -294,7 +294,7 @@ export default function AppPage() {
             <ol className="relative space-y-3 border-l border-line pl-5 ml-1.5">
               {timeline.map((it) => (
                 <li key={`${it.kind}-${it.c?.id ?? it.m.id}`} className="relative">
-                  <span className={`absolute -left-[26px] top-5 size-2.5 rounded-full ring-4 ring-ink ${it.kind === 'mark' ? 'bg-live' : it.c.kind === 'account_change' ? 'bg-alarm' : 'bg-signal'}`} />
+                  <span className={`absolute -left-[26px] top-5 size-2.5 rounded-full ring-4 ring-ink ${it.kind === 'mark' ? 'bg-amber' : it.c.kind === 'account_change' ? 'bg-alarm' : 'bg-signal'}`} />
                   {it.kind === 'change'
                     ? <ChangeCard change={it.c} img={img} />
                     : <MarkItem m={it.m} endAt={app.removed_at} onDelete={async () => { await api.deleteMark(it.m.id); reload({ quiet: true }); }} />}

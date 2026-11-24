@@ -7,7 +7,7 @@ export function Geo({ cc }) {
   return (
     <span className="inline-flex items-center gap-1 text-muted whitespace-nowrap">
       <span aria-hidden>{flag(cc)}</span>
-      <span className="uppercase text-xs font-medium tracking-wide">{cc}</span>
+      <span className="uppercase text-xs font-mono">{cc}</span>
     </span>
   );
 }
@@ -16,8 +16,8 @@ export function Status({ status }) {
   const { t } = useLang();
   const removed = status === 'removed';
   return (
-    <span className={`inline-flex items-center gap-1.5 text-xs whitespace-nowrap ${removed ? 'text-alarm' : 'text-live'}`}>
-      <span className={`size-1.5 rounded-full ${removed ? 'bg-alarm' : 'bg-live'}`} />
+    <span className={`inline-flex items-center gap-1.5 text-xs whitespace-nowrap ${removed ? 'text-alarm' : 'text-muted'}`}>
+      <span className={`size-1.5 rounded-full ${removed ? 'bg-alarm' : 'bg-muted'}`} />
       {removed ? t('status_removed') : t('status_live')}
     </span>
   );
@@ -97,9 +97,9 @@ export function Toggle({ checked, onChange, label }) {
       aria-label={label}
       title={label}
       onClick={(e) => { e.stopPropagation(); onChange(!checked); }}
-      className={`relative h-5 w-9 rounded-full transition-colors cursor-pointer ${checked ? 'bg-live/80' : 'bg-line'}`}
+      className={`relative h-5 w-9 rounded-full transition-colors cursor-pointer ${checked ? 'bg-signal/25' : 'bg-line'}`}
     >
-      <span className={`absolute top-0.5 size-4 rounded-full bg-text transition-all ${checked ? 'left-[18px]' : 'left-0.5'}`} />
+      <span className={`absolute top-0.5 size-4 rounded-full transition-all ${checked ? 'bg-signal' : 'bg-faint'} ${checked ? 'left-[18px]' : 'left-0.5'}`} />
     </button>
   );
 }

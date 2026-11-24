@@ -1,20 +1,23 @@
-@import "@fontsource-variable/onest";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Onest Variable", system-ui, sans-serif;
+  --font-sans: "Inter Variable", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono Variable", ui-monospace, monospace;
 
-  /* ASO Radar palette: navy instrument panel + one amber "signal" colour for detected changes */
-  --color-ink: #131c2e;      /* page */
-  --color-panel: #1a2439;    /* surfaces */
-  --color-raised: #212d47;   /* hover / inputs */
-  --color-line: #2a3653;     /* borders */
-  --color-text: #e4e8f1;
-  --color-muted: #8c97b0;
-  --color-faint: #5d6886;
-  --color-signal: #f5b544;   /* change detected */
-  --color-live: #52c79a;
-  --color-alarm: #ef6f6c;    /* removed / account change */
+  /* "Better Call Saul" palette, 85% / 12% / 3% rule:
+     85% neutral charcoal surfaces, 12% Saul yellow for focus and primary actions, 3% red for alarms */
+  --color-ink: #0e0f11;      /* page */
+  --color-panel: #16181d;    /* cards */
+  --color-raised: #1f2229;   /* hover / inputs */
+  --color-line: #2a2e37;     /* borders */
+  --color-text: #f3f4f6;
+  --color-muted: #9ca3af;
+  --color-faint: #6b7280;
+  --color-signal: #f5c518;   /* Saul yellow: active tabs, primary buttons, detected changes */
+  --color-amber: #d97706;    /* secondary accent: manual marks */
+  --color-alarm: #dc2626;    /* removed apps, account changes */
 }
 
 html { color-scheme: dark; }
@@ -22,7 +25,6 @@ body {
   @apply bg-ink text-text font-sans antialiased;
   font-size: 14px;
   line-height: 1.45;
-  font-feature-settings: "tnum" 1;
 }
 :focus-visible { outline: 2px solid var(--color-signal); outline-offset: 2px; border-radius: 4px; }
 @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }

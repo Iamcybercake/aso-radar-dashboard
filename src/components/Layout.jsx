@@ -5,8 +5,8 @@ import { api, DEMO } from '../lib/api.js';
 export function RadarMark({ className = 'size-6' }) {
   return (
     <svg viewBox="0 0 32 32" className={className} aria-hidden>
-      <circle cx="16" cy="16" r="13" fill="none" stroke="var(--color-line)" strokeWidth="2" />
-      <circle cx="16" cy="16" r="7" fill="none" stroke="var(--color-line)" strokeWidth="2" />
+      <circle cx="16" cy="16" r="13" fill="none" stroke="var(--color-faint)" strokeWidth="2" />
+      <circle cx="16" cy="16" r="7" fill="none" stroke="var(--color-faint)" strokeWidth="2" />
       <path d="M16 16 L16 3 A13 13 0 0 1 27.3 9.5 Z" fill="var(--color-signal)" opacity=".8" />
       <circle cx="23" cy="9" r="2.2" fill="var(--color-signal)" />
     </svg>
@@ -29,13 +29,13 @@ export function LangSwitch() {
 
 export default function Layout() {
   const { t } = useLang();
-  const link = ({ isActive }) => `px-2.5 py-1 rounded-md ${isActive ? 'bg-raised text-text' : 'text-muted hover:text-text'}`;
+  const link = ({ isActive }) => `px-2.5 py-1 rounded-md ${isActive ? 'bg-signal text-ink font-semibold' : 'text-muted hover:text-text'}`;
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-20 border-b border-line bg-ink/95 backdrop-blur">
         <div className="mx-auto max-w-[1400px] px-4 h-12 flex items-center gap-3 sm:gap-4">
           <NavLink to="/" className="flex items-center gap-2 font-semibold shrink-0">
-            <RadarMark /> <span className="hidden sm:inline">ASO Radar</span>
+            <RadarMark /> <span className="hidden sm:inline font-extrabold italic tracking-tight text-signal text-[15px]">ASO Radar</span>
           </NavLink>
           <nav className="flex gap-1 text-sm">
             <NavLink to="/" end className={link}>{t('nav_competitors')}</NavLink>

@@ -159,7 +159,7 @@ export default function Competitors() {
                         <div className="min-w-0">
                           <div className="font-medium truncate max-w-80">
                             {r.title || r.name || `id${r.app_store_id}`}
-                            {r.is_own && <span className="ml-2 text-xs text-live">{t('own')}</span>}
+                            {r.is_own && <span className="ml-2 text-xs text-signal">{t('own')}</span>}
                           </div>
                           <div className="text-xs text-muted truncate max-w-80">
                             {r.last_checked_at ? (r.subtitle || r.developer_name) : <span className="text-faint">{t('no_data_yet')}</span>}
@@ -172,9 +172,9 @@ export default function Competitors() {
                     </td>
                     <td className="px-3 py-2"><Geo cc={r.country} /></td>
                     <td className="px-3 py-2"><Status status={r.status} /></td>
-                    <td className="px-3 py-2 text-muted">{r.version || '—'}</td>
-                    <td className="px-3 py-2 text-right">{sinceUpd != null ? `${sinceUpd} ${t('days_short')}` : '—'}</td>
-                    <td className="px-3 py-2 text-right text-muted">{tracked != null ? `${tracked} ${t('days_short')}` : '—'}</td>
+                    <td className="px-3 py-2 tabular-nums text-muted">{r.version || '—'}</td>
+                    <td className="px-3 py-2 tabular-nums text-right">{sinceUpd != null ? `${sinceUpd} ${t('days_short')}` : '—'}</td>
+                    <td className="px-3 py-2 tabular-nums text-right text-muted">{tracked != null ? `${tracked} ${t('days_short')}` : '—'}</td>
                     <td className="px-3 py-2 whitespace-nowrap">
                       {r.last_change_at ? (
                         <span className={recent ? 'text-signal font-medium' : 'text-muted'}>
@@ -183,10 +183,10 @@ export default function Competitors() {
                       ) : <span className="text-faint">—</span>}
                     </td>
                     <td className="px-3 py-2 whitespace-nowrap">
-                      {r.chart_rank ? <><span className="font-medium">#{r.chart_rank}</span> <span className="text-xs text-muted">{r.chart_category}</span></> : <span className="text-faint">—</span>}
+                      {r.chart_rank ? <><span className="font-medium tabular-nums">#{r.chart_rank}</span> <span className="text-xs text-muted">{r.chart_category}</span></> : <span className="text-faint">—</span>}
                     </td>
                     <td className="px-3 py-2 whitespace-nowrap">
-                      {r.rating != null ? <>{Number(r.rating).toFixed(1)} <span className="text-xs text-muted">{fmtCount(r.rating_count)}</span></> : <span className="text-faint">—</span>}
+                      {r.rating != null ? <span className="tabular-nums">{Number(r.rating).toFixed(1)} <span className="text-xs text-muted">{fmtCount(r.rating_count)}</span></span> : <span className="text-faint">—</span>}
                     </td>
                     <td className="px-3 py-2">
                       <Toggle checked={r.active} onChange={(v) => toggleActive(r, v)} label={r.active ? t('tracking_on') : t('tracking_off')} />

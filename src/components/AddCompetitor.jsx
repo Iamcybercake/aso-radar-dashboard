@@ -53,12 +53,12 @@ export default function AddCompetitor({ open, onClose, onAdded }) {
               <input className="input w-20 uppercase" maxLength={2} value={geo} onChange={(e) => setGeo(e.target.value)} />
             </label>
             <div className="text-xs text-muted pb-2">
-              id{parsed.appStoreId}{parsed.slugName ? ` · ${parsed.slugName}` : ''}
+              <span className="font-mono">id{parsed.appStoreId}</span>{parsed.slugName && <span className="ml-3">{parsed.slugName}</span>}
             </div>
           </div>
         )}
         {parsed && <p className="text-xs text-faint -mt-2">{t('add_geo_hint')}</p>}
-        {msg && <p role="status" className={`text-sm ${msg.kind === 'ok' ? 'text-live' : 'text-alarm'}`}>{msg.text}</p>}
+        {msg && <p role="status" className={`text-sm ${msg.kind === 'ok' ? 'text-signal' : 'text-alarm'}`}>{msg.text}</p>}
         <div className="flex justify-end gap-2 pt-1">
           <button type="button" className="btn" onClick={close}>{msg?.kind === 'ok' ? t('close') : t('cancel')}</button>
           <button className="btn btn-primary" disabled={busy || !link}>{t('add_save')}</button>
