@@ -15,7 +15,7 @@ const SORTS = {
   tracked: (r) => daysBetween(r.tracked_since) ?? -1,
   change: (r) => (r.last_change_at ? -new Date(r.last_change_at) : 0),
   chart: (r) => r.chart_rank ?? 1e9,
-  rating: (r) => -(r.rating_count ?? -1),
+  rating: (r) => -(r.rating_count || 0),
   added: (r) => -new Date(r.created_at),
 };
 
@@ -187,7 +187,7 @@ export default function Competitors() {
                       {r.chart_rank ? <><span className="font-medium tabular-nums">#{r.chart_rank}</span> <span className="text-xs text-muted">{r.chart_category}</span></> : <span className="text-faint">—</span>}
                     </td>
                     <td className="px-3 py-2 whitespace-nowrap">
-                      {r.rating != null ? <span className="tabular-nums">{Number(r.rating).toFixed(1)} <span className="text-xs text-muted">{fmtCount(r.rating_count)}</span></span> : <span className="text-faint">—</span>}
+                      {r.rating_count > 0 ? <span className="tabular-nums">{Number(r.rating).toFixed(1)} <span className="text-xs text-muted">{fmtCount(r.rating_count)}</span></span> : <span className="text-faint">—</span>}
                     </td>
                     <td className="px-3 py-2">
                       <Toggle checked={r.active} onChange={(v) => toggleActive(r, v)} label={r.active ? t('tracking_on') : t('tracking_off')} />

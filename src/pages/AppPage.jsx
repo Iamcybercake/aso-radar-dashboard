@@ -256,7 +256,7 @@ export default function AppPage() {
           </dl>
         </div>
         <div className="flex items-center gap-4">
-          {s?.rating != null && (
+          {s?.rating_count > 0 && (
             <div className="text-right">
               <div className="text-2xl font-semibold tabular-nums">{Number(s.rating).toFixed(1)}</div>
               <div className="text-xs text-muted">{fmtCount(s.rating_count)} {t('ratings')}</div>
