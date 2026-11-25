@@ -131,7 +131,7 @@ function overviewRow(a) {
     id: a.id, app_store_id: a.app_store_id, country: a.country, name: a.name, is_own: a.is_own, status: a.status,
     active: a.active, removed_at: a.removed_at, created_at: a.created_at,
     title: s?.title ?? null, subtitle: s?.subtitle ?? null, icon_url: s?.icon_url ?? null, version: s?.version ?? null,
-    version_released_at: s?.version_released_at ?? null, developer_name: s?.developer_name ?? null, category: s?.category ?? null,
+    version_released_at: s?.version_released_at ?? null, first_released_at: s?.first_released_at ?? null, developer_name: s?.developer_name ?? null, category: s?.category ?? null,
     rating: s?.rating ?? null, rating_count: s?.rating_count ?? null, chart_category: s?.chart_category ?? null,
     chart_rank: s?.chart_rank ?? null, editors_choice: s?.editors_choice ?? null, last_checked_at: s?.captured_at ?? null,
     tracked_since: snaps.length ? snaps.map((x) => x.captured_at).sort()[0] : null,

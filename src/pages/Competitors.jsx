@@ -4,14 +4,14 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useLang } from '../lib/i18n.jsx';
 import { api } from '../lib/api.js';
 import { makeImg, useAsync } from '../lib/hooks.js';
-import { daysBetween, fmtAgo, fmtCount } from '../lib/format.js';
+import { daysBetween, fmtAgo, fmtCount, liveSince } from '../lib/format.js';
 import { AppIcon, Empty, ErrorBox, Geo, Loading, Status, Tag, Toggle } from '../components/ui.jsx';
 import AddCompetitor from '../components/AddCompetitor.jsx';
 
 const SORTS = {
   name: (r) => (r.title || r.name || '').toLowerCase(),
   geo: (r) => r.country,
-  update: (r) => daysBetween(r.version_released_at) ?? 1e9,
+  update: (r) => daysBetween(liveSince(r.version_released_at, r.first_released_at)) ?? 1e9,
   tracked: (r) => daysBetween(r.tracked_since) ?? -1,
   change: (r) => (r.last_change_at ? -new Date(r.last_change_at) : 0),
   chart: (r) => r.chart_rank ?? 1e9,
@@ -144,7 +144,7 @@ export default function Competitors() {
             </thead>
             <tbody>
               {rows.map((r) => {
-                const sinceUpd = daysBetween(r.version_released_at, r.removed_at || undefined);
+                const sinceUpd = daysBetween(liveSince(r.version_released_at, r.first_released_at), r.removed_at || undefined);
                 const tracked = daysBetween(r.tracked_since);
                 const recent = r.last_change_at && daysBetween(r.last_change_at) <= 1;
                 return (

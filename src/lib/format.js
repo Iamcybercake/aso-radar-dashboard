@@ -9,6 +9,14 @@ export const daysBetween = (a, b = new Date()) => {
   return Number.isFinite(d) ? Math.max(0, d) : null;
 };
 
+// Date the current version became visible to users. A version can be approved before the app goes live
+// in the store (manual release / later availability date), so it never counts from before the first release.
+export const liveSince = (versionAt, firstReleaseAt) => {
+  if (!versionAt) return null;
+  if (firstReleaseAt && new Date(firstReleaseAt) > new Date(versionAt)) return firstReleaseAt;
+  return versionAt;
+};
+
 export const fmtDate = (v, lang) =>
   v ? new Date(v).toLocaleDateString(lang === 'ru' ? 'ru-RU' : 'en-US', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
 

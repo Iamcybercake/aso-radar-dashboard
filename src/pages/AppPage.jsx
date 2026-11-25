@@ -4,7 +4,7 @@ import { Link, useParams } from 'react-router-dom';
 import { useLang } from '../lib/i18n.jsx';
 import { api } from '../lib/api.js';
 import { makeImg, useAsync } from '../lib/hooks.js';
-import { daysBetween, fmtCount, fmtDate, fmtDateTime, storeUrl } from '../lib/format.js';
+import { daysBetween, fmtCount, fmtDate, fmtDateTime, liveSince, storeUrl } from '../lib/format.js';
 import { AppIcon, Empty, ErrorBox, Geo, Loading, Modal, Status, Tag } from '../components/ui.jsx';
 import ChangeCard from '../components/ChangeCard.jsx';
 import { Thumb } from '../components/Lightbox.jsx';
@@ -285,7 +285,7 @@ export default function AppPage() {
 
       <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
         <Life label={t('life_released')} days={daysBetween(s?.first_released_at, end)} sub={s?.first_released_at && fmtDate(s.first_released_at, lang)} />
-        <Life label={t('life_update')} days={daysBetween(s?.version_released_at, end)} sub={s?.version_released_at && `${s.version}, ${fmtDate(s.version_released_at, lang)}`} />
+        <Life label={t('life_update')} days={daysBetween(liveSince(s?.version_released_at, s?.first_released_at), end)} sub={s?.version_released_at && `${s.version}, ${fmtDate(s.version_released_at, lang)}${liveSince(s.version_released_at, s.first_released_at) !== s.version_released_at ? ` (${t('before_release')})` : ''}`} />
         <Life label={t('life_tracked')} days={daysBetween(app.tracked_since, end)} sub={app.tracked_since && fmtDate(app.tracked_since, lang)} />
         {app.status === 'removed'
           ? <Life label={t('life_removed')} days={daysBetween(app.removed_at)} sub={fmtDate(app.removed_at, lang)} />
