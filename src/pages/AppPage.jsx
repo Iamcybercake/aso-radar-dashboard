@@ -7,6 +7,7 @@ import { makeImg, useAsync } from '../lib/hooks.js';
 import { daysBetween, fmtCount, fmtDate, fmtDateTime, storeUrl } from '../lib/format.js';
 import { AppIcon, Empty, ErrorBox, Geo, Loading, Modal, Status, Tag } from '../components/ui.jsx';
 import ChangeCard from '../components/ChangeCard.jsx';
+import { Thumb } from '../components/Lightbox.jsx';
 
 const MARK_TYPES = ['top1', 'top3', 'top10', 'motivated_traffic', 'offer_change', 'featured', 'other'];
 
@@ -49,14 +50,17 @@ function Section({ title, children, count }) {
   );
 }
 
-function Shots({ urls, img, pad }) {
+function Shots({ urls, img, pad, label }) {
   const { t } = useLang();
   if (!urls?.length) return <p className="text-xs text-faint">{t('no_items')}</p>;
+  const full = urls.map(img);
   return (
     <div className="flex gap-2 overflow-x-auto thin-scroll p-1 -m-1">
       {urls.map((u, i) => (
-        <img key={`${u}-${i}`} src={img(u)} alt="" loading="lazy"
-          className={`shrink-0 rounded-md border border-line/60 object-cover bg-raised ${pad ? 'h-28 aspect-[4/3]' : 'h-52 aspect-[300/650]'}`} />
+        <Thumb key={`${u}-${i}`} urls={full} index={i} label={label} className="shrink-0">
+          <img src={img(u)} alt="" loading="lazy"
+            className={`rounded-md border border-line/60 object-cover bg-raised hover:border-muted ${pad ? 'h-28 aspect-[4/3]' : 'h-52 aspect-[300/650]'}`} />
+        </Thumb>
       ))}
     </div>
   );
@@ -68,16 +72,20 @@ function StorePreview({ s, img }) {
   if (!s) return null;
   return (
     <div className="rounded-lg border border-line bg-panel px-4">
-      <Section title={t('iphone')} count={s.screenshot_urls?.length}><Shots urls={s.screenshot_urls} img={img} /></Section>
+      <Section title={t('iphone')} count={s.screenshot_urls?.length}><Shots urls={s.screenshot_urls} img={img} label={t('iphone')} /></Section>
       {s.ipad_screenshot_urls?.length > 0 && (
-        <Section title={t('ipad')} count={s.ipad_screenshot_urls.length}><Shots urls={s.ipad_screenshot_urls} img={img} pad /></Section>
+        <Section title={t('ipad')} count={s.ipad_screenshot_urls.length}><Shots urls={s.ipad_screenshot_urls} img={img} pad label={t('ipad')} /></Section>
       )}
       <Section title={t('events')} count={s.events?.length || 0}>
         {s.events?.length ? (
           <div className="space-y-3">
             {s.events.map((e) => (
               <div key={e.id} className="flex gap-3">
-                {e.image && <img src={img(e.image)} alt="" className="h-16 aspect-video rounded object-cover shrink-0" loading="lazy" />}
+                {e.image && (
+                  <Thumb urls={[img(e.image)]} label={e.title} className="shrink-0">
+                    <img src={img(e.image)} alt="" className="h-16 aspect-video rounded object-cover" loading="lazy" />
+                  </Thumb>
+                )}
                 <div className="text-sm min-w-0">
                   <div className="font-medium">{e.title}</div>
                   <div className="text-xs text-muted">{e.subtitle}</div>
@@ -232,7 +240,9 @@ export default function AppPage() {
       <Link to="/" className="text-sm text-muted hover:text-text">← {t('back')}</Link>
 
       <header className="flex flex-wrap gap-5 items-start">
-        <AppIcon src={img(s?.icon_url)} name={app.title || app.name} size={88} />
+        {s?.icon_url
+          ? <Thumb urls={[img(s.icon_url)]} label={app.title || app.name}><AppIcon src={img(s.icon_url)} name={app.title || app.name} size={88} /></Thumb>
+          : <AppIcon name={app.title || app.name} size={88} />}
         <div className="min-w-[200px] flex-1">
           <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
             <h1 className="text-2xl font-semibold leading-tight">{app.title || app.name}</h1>

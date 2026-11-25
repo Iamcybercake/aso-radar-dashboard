@@ -2,6 +2,7 @@ import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 import { AuthProvider, useSession } from './lib/auth.jsx';
 import { LangProvider } from './lib/i18n.jsx';
 import Layout from './components/Layout.jsx';
+import { LightboxProvider } from './components/Lightbox.jsx';
 import { Loading } from './components/ui.jsx';
 import Login from './pages/Login.jsx';
 import Competitors from './pages/Competitors.jsx';
@@ -29,7 +30,9 @@ export default function App() {
     <LangProvider>
       <AuthProvider>
         <BrowserRouter>
-          <Gate />
+          <LightboxProvider>
+            <Gate />
+          </LightboxProvider>
         </BrowserRouter>
       </AuthProvider>
     </LangProvider>

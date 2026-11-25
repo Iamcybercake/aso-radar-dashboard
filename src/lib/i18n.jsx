@@ -34,7 +34,7 @@ const DICT = {
     timeline: 'Timeline', timeline_empty: 'No changes or marks yet. Changes appear here after the radar spots them.',
     add_mark: 'Add mark', mark_type: 'Type', mark_date: 'Date', mark_keyword: 'Keyword', mark_note: 'Note',
     days_after_mark: (n) => `${n} d after mark`, until_removed: 'until removal',
-    before: 'Before', after: 'After', show_more: 'Show more', show_less: 'Show less',
+    before: 'Before', after: 'After', open_original: 'Open full size', show_more: 'Show more', show_less: 'Show less',
     snapshots_count: (n) => `${n} checks`,
     // changes
     feed_title: 'All changes', all_kinds: 'All kinds', kind_update: 'Update', kind_account_change: 'Account change',
@@ -78,7 +78,7 @@ const DICT = {
     timeline: 'Таймлайн', timeline_empty: 'Изменений и меток пока нет. Изменения появятся, когда радар их заметит.',
     add_mark: 'Добавить метку', mark_type: 'Тип', mark_date: 'Дата', mark_keyword: 'Ключ', mark_note: 'Заметка',
     days_after_mark: (n) => `${n} д после метки`, until_removed: 'до снятия',
-    before: 'Было', after: 'Стало', show_more: 'Показать больше', show_less: 'Свернуть',
+    before: 'Было', after: 'Стало', open_original: 'Открыть в полном размере', show_more: 'Показать больше', show_less: 'Свернуть',
     snapshots_count: (n) => `Проверок: ${n}`,
     feed_title: 'Все изменения', all_kinds: 'Все типы', kind_update: 'Апдейт', kind_account_change: 'Смена аккаунта',
     kind_removed: 'Снято', kind_new_app: 'Новое приложение', all_fields: 'Любое поле',

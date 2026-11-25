@@ -5,6 +5,7 @@ import { useLang } from '../lib/i18n.jsx';
 import { changeLine, imagePair, IMAGE_FIELDS, TEXT_DIFF_FIELDS } from '../lib/changes.js';
 import { fmtDateTime } from '../lib/format.js';
 import { Geo } from './ui.jsx';
+import { Thumb } from './Lightbox.jsx';
 
 const SHAPE = {
   icon: 'h-16 w-16 rounded-[14px]',
@@ -23,15 +24,16 @@ function Strip({ label, urls, compare, shape, img, dim }) {
       ) : (
         <div className="flex gap-2.5 overflow-x-auto thin-scroll p-1.5 -m-1.5">
           {urls.map((u, i) => {
+            const full = urls.map(img);
             const isNew = !dim && compare[i] !== u;
             return (
-              <div key={`${u}-${i}`} className="relative shrink-0">
+              <Thumb key={`${u}-${i}`} urls={full} index={i} label={label} className="relative shrink-0">
                 <img
                   src={img(u)} alt="" loading="lazy"
                   className={`${SHAPE[shape]} object-cover bg-raised ${dim ? 'opacity-50 saturate-50 border border-line' : ''} ${isNew ? 'ring-2 ring-signal ring-offset-2 ring-offset-panel' : dim ? '' : 'border border-line/60'}`}
                 />
                 {shape !== 'icon' && <span className={`absolute left-1 top-1 rounded px-1 text-[10px] font-semibold ${isNew ? 'bg-signal text-ink' : 'bg-ink/70 text-muted'}`}>{i + 1}</span>}
-              </div>
+              </Thumb>
             );
           })}
         </div>
